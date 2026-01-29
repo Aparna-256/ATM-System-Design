@@ -1,10 +1,8 @@
 #include "BalanceInquiry.h"
-#include "../account/Account.h"
 #include <iostream>
+#include "../account/Account.h"
 
-BalanceInquiry::BalanceInquiry(Account* account)
-    : Transaction(account) {}
-
-void BalanceInquiry::execute() {
-    std::cout << "Current Balance: " << account->getBalance() << "\n";
+void BalanceInquiry::execute(Account* account) {
+    std::cout << "Current Balance: ₹" 
+              << account->getBalance() << std::endl;
 }

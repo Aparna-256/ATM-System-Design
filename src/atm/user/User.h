@@ -1,9 +1,8 @@
-#ifndef USER_H
-#define USER_H
-
+#pragma once
 #include <string>
 #include "Card.h"
-#include "../account/Account.h"
+
+class Account;   // ⭐ THIS LINE IS REQUIRED
 
 class User {
 private:
@@ -16,5 +15,3 @@ public:
     bool authenticate(int pin) const;
     Account* getAccount() const;
 };
-
-#endif

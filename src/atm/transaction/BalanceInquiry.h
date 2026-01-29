@@ -5,8 +5,7 @@
 
 class BalanceInquiry : public Transaction {
 public:
-    explicit BalanceInquiry(Account* account);
-    void execute() override;
+    void execute(Account* account) override;
 };
 
 #endif

@@ -1,14 +1,15 @@
 #include "Withdrawal.h"
-#include "../account/Account.h"
 #include <iostream>
+#include "../account/Account.h"
 
-Withdrawal::Withdrawal(Account* account, double amount)
-    : Transaction(account), amount(amount) {}
+void Withdrawal::execute(Account* account) {
+    double amount;
+    std::cout << "Enter withdrawal amount: ";
+    std::cin >> amount;
 
-void Withdrawal::execute() {
     if (account->withdraw(amount)) {
-        std::cout << "Withdrawal successful: " << amount << "\n";
+        std::cout << "Please collect your cash." << std::endl;
     } else {
-        std::cout << "Insufficient balance\n";
+        std::cout << "Insufficient balance!" << std::endl;
     }
 }

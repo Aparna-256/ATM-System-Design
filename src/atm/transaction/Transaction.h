@@ -4,12 +4,8 @@
 class Account;
 
 class Transaction {
-protected:
-    Account* account;
-
 public:
-    explicit Transaction(Account* account);
-    virtual void execute() = 0;
+    virtual void execute(Account* account) = 0;
     virtual ~Transaction() = default;
 };
 

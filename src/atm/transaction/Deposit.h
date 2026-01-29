@@ -4,11 +4,8 @@
 #include "Transaction.h"
 
 class Deposit : public Transaction {
-    double amount;
-
 public:
-    Deposit(Account* account, double amount);
-    void execute() override;
+    void execute(Account* account) override;
 };
 
 #endif
