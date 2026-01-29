@@ -5,7 +5,7 @@
 
 class Card {
 private:
-    std::string number;
+    std::string cardNumber;
     int pin;
 
 public:

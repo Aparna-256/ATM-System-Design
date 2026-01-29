@@ -3,8 +3,7 @@
 
 #include <string>
 #include "Card.h"
-
-class Account;
+#include "../account/Account.h"
 
 class User {
 private:
