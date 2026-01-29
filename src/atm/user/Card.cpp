@@ -1,4 +1,5 @@
 #include "Card.h"
+#include <string>
 
 Card::Card(const std::string& number, int pin)
     : cardNumber(number), pin(pin) {}
