@@ -5,12 +5,17 @@
 
 class Card {
 private:
-    std::string cardNumber;
+    std::string number;
     int pin;
+    int failedAttempts;
+    bool blocked;
 
 public:
     Card(const std::string& number, int pin);
-    bool validatePin(int enteredPin) const;
+
+    bool validatePin(int enteredPin);
+    bool isBlocked() const;
+
     std::string getCardNumber() const;
 };
 

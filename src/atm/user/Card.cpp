@@ -1,13 +1,27 @@
 #include "Card.h"
-#include <string>
 
 Card::Card(const std::string& number, int pin)
-    : cardNumber(number), pin(pin) {}
+    : number(number), pin(pin), failedAttempts(0), blocked(false) {}
 
-bool Card::validatePin(int enteredPin) const {
-    return pin == enteredPin;
+bool Card::validatePin(int enteredPin) {
+    if (blocked) return false;
+
+    if (pin == enteredPin) {
+        failedAttempts = 0;
+        return true;
+    }
+
+    failedAttempts++;
+    if (failedAttempts >= 3) {
+        blocked = true;
+    }
+    return false;
+}
+
+bool Card::isBlocked() const {
+    return blocked;
 }
 
 std::string Card::getCardNumber() const {
-    return cardNumber;
+    return number;
 }
