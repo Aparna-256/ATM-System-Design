@@ -1,18 +1,25 @@
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
 #include <vector>
-#include "../transaction/TransactionRecord.h"
+#include <string>
 
 class Account {
 private:
-    double balance;
-    std::vector<TransactionRecord> history;
+    int balance;
+    int dailyWithdrawn;
+    const int DAILY_LIMIT = 20000;
+    std::vector<std::string> history;
 
 public:
-    Account(double balance);
+    Account(int initialBalance);
 
-    void deposit(double amount);
-    bool withdraw(double amount);
+    int getBalance() const;
 
-    double getBalance() const;
-    void addTransaction(const std::string& type, double amount);
+    void deposit(int amount);
+    void withdraw(int amount);
+
     void showHistory() const;
 };
+
+#endif

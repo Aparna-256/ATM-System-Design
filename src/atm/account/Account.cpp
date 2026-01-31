@@ -1,21 +1,40 @@
 #include "Account.h"
+#include "../core/ATMException.h"
+#include <iostream>
 
-Account::Account(double initialBalance) : balance(initialBalance) {}
+Account::Account(int initialBalance)
+    : balance(initialBalance), dailyWithdrawn(0) {}
 
-double Account::getBalance() const {
+int Account::getBalance() const {
     return balance;
 }
 
-void Account::deposit(double amount) {
-    if (amount > 0) {
-        balance += amount;
-    }
+void Account::deposit(int amount) {
+    if (amount <= 0)
+        throw InvalidAmountException();
+
+    balance += amount;
+    history.push_back("Deposit: Rs. " + std::to_string(amount));
 }
 
-bool Account::withdraw(double amount) {
-    if (amount > 0 && balance >= amount) {
-        balance -= amount;
-        return true;
-    }
-    return false;
+void Account::withdraw(int amount) {
+    if (amount <= 0)
+        throw InvalidAmountException();
+
+    if (amount > balance)
+        throw InsufficientBalanceException();
+
+    if (dailyWithdrawn + amount > DAILY_LIMIT)
+        throw DailyLimitExceededException();
+
+    balance -= amount;
+    dailyWithdrawn += amount;
+    history.push_back("Withdrawal: Rs. " + std::to_string(amount));
+}
+
+void Account::showHistory() const {
+    std::cout << "\n--- Mini Statement ---\n";
+    for (const auto& h : history)
+        std::cout << h << "\n";
+    std::cout << "----------------------\n";
 }

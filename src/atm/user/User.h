@@ -2,7 +2,7 @@
 #include <string>
 #include "Card.h"
 
-class Account;   // ⭐ THIS LINE IS REQUIRED
+class Account;   // THIS LINE IS REQUIRED
 
 class User {
 private:
@@ -12,6 +12,6 @@ private:
 
 public:
     User(const std::string& name, Card card, Account* account);
-    bool authenticate(int pin) const;
+    bool authenticate(int pin);
     Account* getAccount() const;
 };

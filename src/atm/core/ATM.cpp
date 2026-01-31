@@ -1,4 +1,5 @@
 #include "ATM.h"
+#include "ATMException.h"
 #include <iostream>
 
 #include "../transaction/Deposit.h"
@@ -7,7 +8,6 @@
 
 void ATM::start(User& user) {
     int pin;
-
     std::cout << "Enter PIN: ";
     std::cin >> pin;
 
@@ -29,31 +29,35 @@ void ATM::start(User& user) {
 
         std::cin >> choice;
 
-        switch (choice) {
-            case 1: {
-                BalanceInquiry bi;
-                bi.execute(user.getAccount());
-                break;
+        try {
+            switch (choice) {
+                case 1: {
+                    BalanceInquiry bi;
+                    bi.execute(user.getAccount());
+                    break;
+                }
+                case 2: {
+                    Deposit d;
+                    d.execute(user.getAccount());
+                    break;
+                }
+                case 3: {
+                    Withdrawal w;
+                    w.execute(user.getAccount());
+                    break;
+                }
+                case 4:
+                    user.getAccount()->showHistory();
+                    break;
+                case 5:
+                    std::cout << "Thank you for using ATM!\n";
+                    break;
+                default:
+                    std::cout << "Invalid option!\n";
             }
-            case 2: {
-                Deposit d;
-                d.execute(user.getAccount());
-                break;
-            }
-            case 3: {
-                Withdrawal w;
-                w.execute(user.getAccount());
-                break;
-            }
-            case 4: {
-                user.getAccount()->showHistory();
-                break;
-            }
-            case 5:
-                std::cout << "Thank you for using ATM!\n";
-                break;
-            default:
-                std::cout << "Invalid option!\n";
+        }
+        catch (const ATMException& e) {
+            std::cout << "❌ Error: " << e.what() << "\n";
         }
 
     } while (choice != 5);
