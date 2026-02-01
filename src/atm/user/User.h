@@ -1,26 +1,17 @@
 #ifndef USER_H
 #define USER_H
 
-#include <string>
-#include "Card.h"
-#include "../account/Account.h"
-
 class User {
 private:
-    std::string name;
-    Card card;
-    Account* account;
+    int pin;
     int failedAttempts;
-    const int MAX_ATTEMPTS = 3;
     bool locked;
 
 public:
-    User(const std::string& name, Card card, Account* account);
+    User(int pin);
 
-    bool authenticate(int pin);
+    bool authenticate(int enteredPin);
     bool isLocked() const;
-
-    Account* getAccount() const;
 };
 
 #endif

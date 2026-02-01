@@ -1,37 +1,23 @@
 #include "User.h"
-#include <iostream>
 
-User::User(const std::string& name, Card card, Account* account)
-    : name(name), card(card), account(account),
-      failedAttempts(0), locked(false) {}
+User::User(int pin) : pin(pin), failedAttempts(0), locked(false) {}
 
-bool User::authenticate(int pin) {
-    if (locked) {
-        std::cout << "❌ Card is locked due to multiple failed attempts.\n";
+bool User::authenticate(int enteredPin) {
+    if (locked)
         return false;
-    }
 
-    if (card.validatePin(pin)) {
+    if (enteredPin == pin) {
         failedAttempts = 0;
         return true;
     }
 
     failedAttempts++;
-    std::cout << "❌ Incorrect PIN. Attempts left: "
-              << (MAX_ATTEMPTS - failedAttempts) << "\n";
-
-    if (failedAttempts >= MAX_ATTEMPTS) {
+    if (failedAttempts >= 3)
         locked = true;
-        std::cout << "🚫 Card locked for security reasons.\n";
-    }
 
     return false;
 }
 
 bool User::isLocked() const {
     return locked;
-}
-
-Account* User::getAccount() const {
-    return account;
 }

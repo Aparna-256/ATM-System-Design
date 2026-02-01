@@ -4,3 +4,6 @@ Balance Inquiry: Rs. 150.000000
 Deposit: Rs. 500.000000
 Balance Inquiry: Rs. 650.000000
 Withdrawal: Rs. 500.000000
+[TXN0001] [2026-02-01 16:30:26] Balance Inquiry: Rs. 150
+[TXN0002] [2026-02-01 16:30:26] Deposit: Rs. 50
+[TXN0003] [2026-02-01 16:30:26] Withdrawal: Rs. 30

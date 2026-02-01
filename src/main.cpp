@@ -1,19 +1,18 @@
-#include <iostream>
 #include "atm/core/ATM.h"
-#include "atm/account/Account.h"
-#include "atm/user/Card.h"
-#include "atm/user/User.h"
+#include "TestSuite.h"
+#include <iostream>
 
 int main() {
-    Account account;
-    account.loadFromFile("data/account.txt");
+    int mode;
+    std::cout << "1. Run ATM\n2. Run Tests\nChoose: ";
+    std::cin >> mode;
 
-    Card card("1234-5678", 1234);
-    User user("Aparna", card, &account);
+    if (mode == 2) {
+        TestSuite::runAll();
+        return 0;
+    }
 
     ATM atm;
-    atm.start(user);
-
-    account.saveToFile("data/account.txt");
+    atm.start();
     return 0;
 }

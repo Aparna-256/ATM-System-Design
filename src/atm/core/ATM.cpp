@@ -1,77 +1,84 @@
 #include "ATM.h"
+#include "TransactionLogger.h"
 #include <iostream>
-#include "../account/Account.h"
-#include "../transaction/Deposit.h"
-#include "../transaction/Withdrawal.h"
-#include "../transaction/BalanceInquiry.h"
-#include "ATMException.h"
-#include "logger.h"
+#include <fstream>
+#include <string>
 
-void ATM::start(User& user) {
+ATM::ATM() : account(150), user(1234) {}
+
+void ATM::start() {
     int pin;
-    bool authenticated = false;
+    std::cout << "Enter PIN: ";
+    std::cin >> pin;
 
-    while (!authenticated && !user.isLocked()) {
-        std::cout << "Enter PIN: ";
-        if (!(std::cin >> pin)) {
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            continue;
-        }
-        authenticated = user.authenticate(pin);
-    }
-
-    if (!authenticated) {
+    if (!user.authenticate(pin)) {
+        std::cout << "Invalid PIN or Account Locked!\n";
         return;
     }
 
     std::cout << "\nATM System - Initialized\n";
 
     int choice;
-    do {
-        std::cout << "\n1. Balance Inquiry\n";
-        std::cout << "2. Deposit\n";
-        std::cout << "3. Withdraw\n";
-        std::cout << "4. Mini Statement\n";
-        std::cout << "5. Exit\n";
-        std::cout << "Choose option: ";
+    int inactivity = 0;
 
-        if (!(std::cin >> choice)) {
+    while (true) {
+        if (inactivity >= 3) {
+            std::cout << "Session expired due to inactivity.\n";
+            break;
+        }
+
+        std::cout << "\n1. Balance Inquiry\n2. Deposit\n3. Withdraw\n4. Mini Statement\n5. Exit\nChoose option: ";
+        std::cin >> choice;
+
+        if (!std::cin) {
             std::cin.clear();
-            std::cin.ignore(10000, '\n');
+            std::cin.ignore(1000, '\n');
+            inactivity++;
             continue;
         }
 
-        try {
-            switch (choice) {
-                case 1: {
-                    BalanceInquiry bi;
-                    bi.execute(user.getAccount());
-                    break;
-                }
-                case 2: {
-                    Deposit d;
-                    d.execute(user.getAccount());
-                    break;
-                }
-                case 3: {
-                    Withdrawal w;
-                    w.execute(user.getAccount());
-                    break;
-                }
-                case 4: {
-                    Logger::showLogs();
-                    break;
-                }
-                case 5:
-                    std::cout << "Thank you for using ATM!\n";
-                    break;
-                default:
-                    std::cout << "Invalid option!\n";
-            }
-        } catch (const ATMException& e) {
-            std::cout << "❌ Error: " << e.what() << "\n";
-        }
+        inactivity = 0;
 
-    } while (choice != 5);
+        if (choice == 1) {
+            double bal = account.getBalance();
+            std::cout << "Current Balance: Rs. " << bal << "\n";
+            TransactionLogger::log("Balance Inquiry", bal);
+        }
+        else if (choice == 2) {
+            double amt;
+            std::cout << "Enter deposit amount: ";
+            std::cin >> amt;
+            account.deposit(amt);
+            TransactionLogger::log("Deposit", amt);
+            std::cout << "Deposit successful!\n";
+        }
+        else if (choice == 3) {
+            double amt;
+            std::cout << "Enter withdrawal amount: ";
+            std::cin >> amt;
+            if (account.withdraw(amt)) {
+                TransactionLogger::log("Withdrawal", amt);
+                std::cout << "Withdrawal successful!\n";
+            } else {
+                std::cout << "Insufficient balance!\n";
+            }
+        }
+        else if (choice == 4) {
+            std::ifstream file("logs/transactions.log");
+            std::string line;
+            std::cout << "\n--- Audit Trail / Mini Statement ---\n";
+            while (getline(file, line))
+                std::cout << line << "\n";
+            std::cout << "------------------------------------\n";
+            file.close();
+        }
+        else if (choice == 5) {
+            std::cout << "Thank you for using ATM!\n";
+            break;
+        }
+        else {
+            std::cout << "Invalid option!\n";
+            inactivity++;
+        }
+    }
 }
