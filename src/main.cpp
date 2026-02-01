@@ -1,6 +1,6 @@
 #include <iostream>
 #include "atm/core/ATM.h"
-#include "tests/TestRunner.h"
+#include "testRunner.h"
 
 int main() {
     int choice;

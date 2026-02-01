@@ -1,10 +1,10 @@
 #pragma once
-#include <mutex>
+#include "atm/core/ThreadCompat.h"
 
 class Account {
 private:
     double balance;
-    mutable std::mutex mtx;
+    mutable WinMutex mtx;
 
 public:
     Account(double initial);
