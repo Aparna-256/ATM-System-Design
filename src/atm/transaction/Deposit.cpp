@@ -3,17 +3,15 @@
 #include "../account/Account.h"
 
 void Deposit::execute(Account* account) {
-    double amount;
+    int amount;
     std::cout << "Enter deposit amount: ";
-    std::cin >> amount;
-
-    if (amount <= 0) {
-        std::cout << "Invalid deposit amount.\n";
+    if (!(std::cin >> amount)) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cout << "Invalid input.\n";
         return;
     }
 
     account->deposit(amount);
-    account->addTransaction("Deposit", amount);
-
     std::cout << "Deposit successful!\n";
 }

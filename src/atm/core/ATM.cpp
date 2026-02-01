@@ -1,18 +1,26 @@
 #include "ATM.h"
-#include "ATMException.h"
 #include <iostream>
-
+#include "../account/Account.h"
 #include "../transaction/Deposit.h"
 #include "../transaction/Withdrawal.h"
 #include "../transaction/BalanceInquiry.h"
+#include "ATMException.h"
 
 void ATM::start(User& user) {
     int pin;
-    std::cout << "Enter PIN: ";
-    std::cin >> pin;
+    bool authenticated = false;
 
-    if (!user.authenticate(pin)) {
-        std::cout << "Authentication failed.\n";
+    while (!authenticated && !user.isLocked()) {
+        std::cout << "Enter PIN: ";
+        if (!(std::cin >> pin)) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            continue;
+        }
+        authenticated = user.authenticate(pin);
+    }
+
+    if (!authenticated) {
         return;
     }
 
@@ -27,7 +35,11 @@ void ATM::start(User& user) {
         std::cout << "5. Exit\n";
         std::cout << "Choose option: ";
 
-        std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            continue;
+        }
 
         try {
             switch (choice) {
@@ -46,17 +58,17 @@ void ATM::start(User& user) {
                     w.execute(user.getAccount());
                     break;
                 }
-                case 4:
+                case 4: {
                     user.getAccount()->showHistory();
                     break;
+                }
                 case 5:
                     std::cout << "Thank you for using ATM!\n";
                     break;
                 default:
                     std::cout << "Invalid option!\n";
             }
-        }
-        catch (const ATMException& e) {
+        } catch (const ATMException& e) {
             std::cout << "❌ Error: " << e.what() << "\n";
         }
 

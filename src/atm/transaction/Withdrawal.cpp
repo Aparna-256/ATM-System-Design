@@ -3,19 +3,15 @@
 #include "../account/Account.h"
 
 void Withdrawal::execute(Account* account) {
-    double amount;
+    int amount;
     std::cout << "Enter withdrawal amount: ";
-    std::cin >> amount;
-
-    if (amount <= 0) {
-        std::cout << "Invalid withdrawal amount.\n";
+    if (!(std::cin >> amount)) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cout << "Invalid input.\n";
         return;
     }
 
-    if (account->withdraw(amount)) {
-        account->addTransaction("Withdrawal", amount);
-        std::cout << "Withdrawal successful!\n";
-    } else {
-        std::cout << "Insufficient balance.\n";
-    }
+    account->withdraw(amount);
+    std::cout << "Withdrawal successful!\n";
 }
