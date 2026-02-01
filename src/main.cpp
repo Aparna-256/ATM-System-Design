@@ -1,19 +1,19 @@
 #include <iostream>
-
+#include "atm/core/ATM.h"
+#include "atm/account/Account.h"
 #include "atm/user/Card.h"
 #include "atm/user/User.h"
-#include "atm/account/Account.h"
-#include "atm/core/ATM.h"
 
 int main() {
-    std::cout << "ATM System - Initialized" << std::endl;
+    Account account;
+    account.loadFromFile("data/account.txt");
 
-    Account account(5000);
-    Card card("1111-2222", 1234);
+    Card card("1234-5678", 1234);
     User user("Aparna", card, &account);
 
     ATM atm;
     atm.start(user);
 
+    account.saveToFile("data/account.txt");
     return 0;
 }

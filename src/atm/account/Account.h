@@ -1,25 +1,21 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
-#include <vector>
 #include <string>
 
 class Account {
 private:
-    int balance;
-    int dailyWithdrawn;
-    const int DAILY_LIMIT = 20000;
-    std::vector<std::string> history;
+    double balance;
 
 public:
-    Account(int initialBalance);
+    Account(double balance = 0);
 
-    int getBalance() const;
+    void deposit(double amount);
+    bool withdraw(double amount);
+    double getBalance() const;
 
-    void deposit(int amount);
-    void withdraw(int amount);
-
-    void showHistory() const;
+    void loadFromFile(const std::string& filename);
+    void saveToFile(const std::string& filename);
 };
 
 #endif

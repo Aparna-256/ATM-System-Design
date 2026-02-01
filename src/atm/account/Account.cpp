@@ -1,40 +1,32 @@
 #include "Account.h"
-#include "../core/ATMException.h"
-#include <iostream>
+#include <fstream>
 
-Account::Account(int initialBalance)
-    : balance(initialBalance), dailyWithdrawn(0) {}
+Account::Account(double balance) : balance(balance) {}
 
-int Account::getBalance() const {
+void Account::deposit(double amount) {
+    balance += amount;
+}
+
+bool Account::withdraw(double amount) {
+    if (amount > balance) return false;
+    balance -= amount;
+    return true;
+}
+
+double Account::getBalance() const {
     return balance;
 }
 
-void Account::deposit(int amount) {
-    if (amount <= 0)
-        throw InvalidAmountException();
-
-    balance += amount;
-    history.push_back("Deposit: Rs. " + std::to_string(amount));
+void Account::loadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        file >> balance;
+        file.close();
+    }
 }
 
-void Account::withdraw(int amount) {
-    if (amount <= 0)
-        throw InvalidAmountException();
-
-    if (amount > balance)
-        throw InsufficientBalanceException();
-
-    if (dailyWithdrawn + amount > DAILY_LIMIT)
-        throw DailyLimitExceededException();
-
-    balance -= amount;
-    dailyWithdrawn += amount;
-    history.push_back("Withdrawal: Rs. " + std::to_string(amount));
-}
-
-void Account::showHistory() const {
-    std::cout << "\n--- Mini Statement ---\n";
-    for (const auto& h : history)
-        std::cout << h << "\n";
-    std::cout << "----------------------\n";
+void Account::saveToFile(const std::string& filename) {
+    std::ofstream file(filename);
+    file << balance;
+    file.close();
 }
