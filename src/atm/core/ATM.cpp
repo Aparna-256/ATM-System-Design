@@ -5,6 +5,7 @@
 #include "../transaction/Withdrawal.h"
 #include "../transaction/BalanceInquiry.h"
 #include "ATMException.h"
+#include "logger.h"
 
 void ATM::start(User& user) {
     int pin;
@@ -59,7 +60,7 @@ void ATM::start(User& user) {
                     break;
                 }
                 case 4: {
-                    user.getAccount()->showHistory();
+                    Logger::showLogs();
                     break;
                 }
                 case 5:

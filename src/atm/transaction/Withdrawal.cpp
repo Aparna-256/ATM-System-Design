@@ -1,6 +1,8 @@
 #include "Withdrawal.h"
-#include "../core/Logger.h"
+#include "../account/Account.h"
+#include "../core/logger.h"
 #include <iostream>
+#include <string>
 
 void Withdrawal::execute(Account* account) {
     double amount;
