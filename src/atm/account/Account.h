@@ -1,16 +1,14 @@
-#ifndef ACCOUNT_H
-#define ACCOUNT_H
+#pragma once
+#include <mutex>
 
 class Account {
 private:
     double balance;
+    mutable std::mutex mtx;
 
 public:
-    Account(double initialBalance = 0);
-
-    void deposit(double amount);
+    Account(double initial);
+    bool deposit(double amount);
     bool withdraw(double amount);
     double getBalance() const;
 };
-
-#endif

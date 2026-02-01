@@ -1,12 +1,7 @@
-#ifndef LOGGER_H
-#define LOGGER_H
-
+#pragma once
 #include <string>
 
 class Logger {
 public:
-    static void log(const std::string& message);
-    static void showLogs();
+    static void log(const std::string& entry);
 };
-
-#endif

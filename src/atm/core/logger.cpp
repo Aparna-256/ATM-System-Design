@@ -1,29 +1,16 @@
 #include "logger.h"
 #include <fstream>
-#include <iostream>
-#include <string>
+#include <ctime>
+#include <functional>
 
-void Logger::log(const std::string& message) {
-    // Note: logs directory should be pre-created or handled at system level 
-    // to avoid <filesystem> compatibility issues in some MinGW environments.
-    std::ofstream file("logs/transactions.log", std::ios::app);
-    if (file.is_open()) {
-        file << message << "\n";
-        file.close();
-    }
+static std::string sign(const std::string& data) {
+    return std::to_string(std::hash<std::string>{}(data));
 }
 
-void Logger::showLogs() {
-    std::ifstream file("logs/transactions.log");
-    if (!file.is_open()) {
-        std::cout << "No transaction logs found.\n";
-        return;
-    }
-    std::string line;
-    std::cout << "\n--- Audit Trail / Mini Statement ---\n";
-    while (std::getline(file, line)) {
-        std::cout << line << "\n";
-    }
-    std::cout << "------------------------------------\n";
-    file.close();
+void Logger::log(const std::string& entry) {
+    std::ofstream out("logs/transactions.log", std::ios::app);
+    std::time_t now = std::time(nullptr);
+
+    std::string record = std::string(std::ctime(&now)) + " | " + entry;
+    out << record << " | SIG=" << sign(record) << "\n";
 }

@@ -1,22 +1,22 @@
-#ifndef CARD_H
-#define CARD_H
-
+#pragma once
 #include <string>
 
 class Card {
 private:
-    std::string number;
-    int pin;
+    std::string cardNumber;
+    std::string pinHash;
     int failedAttempts;
-    bool blocked;
+    bool locked;
+
+    std::string hashPin(int pin) const;
 
 public:
     Card(const std::string& number, int pin);
 
     bool validatePin(int enteredPin);
-    bool isBlocked() const;
+    bool isLocked() const;
+    void persistState() const;
+    void loadState();
 
     std::string getCardNumber() const;
 };
-
-#endif

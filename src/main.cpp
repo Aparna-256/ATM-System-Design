@@ -1,18 +1,17 @@
-#include "atm/core/ATM.h"
-#include "TestSuite.h"
 #include <iostream>
+#include "atm/core/ATM.h"
+#include "tests/TestRunner.h"
 
 int main() {
-    int mode;
+    int choice;
     std::cout << "1. Run ATM\n2. Run Tests\nChoose: ";
-    std::cin >> mode;
+    std::cin >> choice;
 
-    if (mode == 2) {
-        TestSuite::runAll();
+    if (choice == 2) {
+        runAllTests();
         return 0;
     }
 
     ATM atm;
     atm.start();
-    return 0;
 }
