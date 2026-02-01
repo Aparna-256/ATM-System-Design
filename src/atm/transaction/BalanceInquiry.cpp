@@ -1,8 +1,8 @@
 #include "BalanceInquiry.h"
+#include "../core/Logger.h"
 #include <iostream>
-#include "../account/Account.h"
 
 void BalanceInquiry::execute(Account* account) {
-    std::cout << "Current Balance: ₹" 
-              << account->getBalance() << std::endl;
+    Logger::log("Balance Inquiry: Rs. " + std::to_string(account->getBalance()));
+    std::cout << "Current Balance: Rs. " << account->getBalance() << "\n";
 }

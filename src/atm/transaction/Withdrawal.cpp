@@ -1,17 +1,16 @@
 #include "Withdrawal.h"
+#include "../core/Logger.h"
 #include <iostream>
-#include "../account/Account.h"
 
 void Withdrawal::execute(Account* account) {
-    int amount;
+    double amount;
     std::cout << "Enter withdrawal amount: ";
-    if (!(std::cin >> amount)) {
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        std::cout << "Invalid input.\n";
-        return;
-    }
+    std::cin >> amount;
 
-    account->withdraw(amount);
-    std::cout << "Withdrawal successful!\n";
+    if (account->withdraw(amount)) {
+        Logger::log("Withdrawal: Rs. " + std::to_string(amount));
+        std::cout << "Withdrawal successful!\n";
+    } else {
+        std::cout << "Insufficient balance!\n";
+    }
 }
