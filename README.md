@@ -199,3 +199,11 @@ Aparna Jha
 This project prioritizes clarity, correctness, and extensibility — exactly what interviewers and research organizations like DRDO look for.
 
 Pink-powered. System-designed. Interview-ready. 🎀✨
+
+✨ UML Class Diagram
+
+The following UML class diagram represents the core architecture of the ATM system.
+It demonstrates the use of OOPS principles such as inheritance, abstraction,
+polymorphism, and separation of concerns.
+
+<img width="1782" height="558" alt="atm-uml-class-diagram" src="https://github.com/user-attachments/assets/7223684b-84ef-41c1-9d30-7c80cd2d12e3" />
