@@ -1,143 +1,140 @@
-# 💖 ATM System Design (C++ | OOPS)
+🎀 ATM System Design (C++ | OOPS | SOLID)
 
-> A menu-driven **ATM System** built using **C++ and Object-Oriented Programming**, designed to simulate real-world ATM operations with clean architecture and scalable design.
+A production-style ATM simulation built in C++ using Object-Oriented Programming and SOLID principles, focused on clean architecture, security, logging, and testability.
 
-🌸 Built for learning  
-🌸 Designed for interviews  
-🌸 Styled with soft pink girly vibes — but still on point
+This project is designed to reflect real-world system design, making it a strong resume + interview + DRDO-ready project.
 
----
+✨ Features
 
-## ✨ Features
+🎀 Secure PIN Authentication
 
-🎀 **ATM Operations**
-- Balance Inquiry  
-- Deposit  
-- Withdrawal  
-- Exit Session  
+PIN verification before access
 
-🎀 **User & Card System**
-- Card abstraction
-- PIN validation support (extendable)
+Card locks after 3 failed attempts
 
-🎀 **Clean & Modular Design**
-- Separated responsibilities
-- Easy to extend with new features
-- Real-world inspired system flow
+🎀 Core ATM Operations
 
----
+Balance Inquiry
 
-## ✨ Project Structure
+Deposit
 
-src/
-│── main.cpp
+Withdraw
 
+🎀 Audit Trail / Mini Statement
+
+Persistent transaction logging
+
+Timestamped entries
+
+Stored in logs/transactions.log
+
+🎀 Transaction Logger
+
+Unique transaction IDs
+
+Date & time stamping
+
+File-based persistence
+
+🎀 Built-in Unit Tests
+
+Deposit validation
+
+Negative withdrawal protection
+
+PIN lock security test
+
+Run tests directly from the executable
+
+🎀 Clean & Modular Architecture
+
+Loosely coupled components
+
+Easy to extend and maintain
+
+🧠 OOPS Concepts Used
+
+💗 Encapsulation
+Sensitive data like balance and PIN are protected within classes
+
+💗 Abstraction
+Transaction interfaces hide internal implementation details
+
+💗 Inheritance
+Deposit, Withdrawal, BalanceInquiry inherit from Transaction
+
+💗 Polymorphism
+ATM dynamically executes different transaction types
+
+💗 Single Responsibility Principle
+Each class handles only one responsibility
+
+🗂️ Project Structure
+ATM-System-Design/
 │
-└── atm/
-
-├── account/
-
-│ ├── Account.h
-
-│ └── Account.cpp
-
+├── src/
+│   └── atm/
+│       ├── account/        # Account & balance logic
+│       ├── core/           # ATM engine & transaction logger
+│       ├── transaction/    # Deposit, Withdraw, Balance Inquiry
+│       └── user/           # User & Card authentication
 │
-
-├── core/
-
-│ ├── ATM.h
-
-│ └── ATM.cpp
-
+├── logs/
+│   └── transactions.log   # Persistent audit trail
 │
-
-├── transaction/
-
-│ ├── Transaction.h
-
-│ ├── BalanceInquiry.h / .cpp
-
-│ ├── Deposit.h / .cpp
-
-│ └── Withdrawal.h / .cpp
-
+├── tests/
+│   └── testRunner.cpp     # Unit test suite
 │
+├── src/main.cpp
+├── README.md
 
-└── user/
+⚙️ How to Build & Run
+🔹 Compile
+g++ -Isrc -Itests src/main.cpp \
+src/atm/account/*.cpp \
+src/atm/core/*.cpp \
+src/atm/transaction/*.cpp \
+src/atm/user/*.cpp \
+tests/testRunner.cpp \
+-std=c++17 -Wall -o atm_system
 
-├── Card.h / .cpp
-
-└── User.h / .cpp
-
-
-✨ Structured to reflect real system design.
-
----
-
-## ✨ How to Build & Run
-
-### 💖 Requirements
-- C++17 compatible compiler  
-- MinGW / g++  
-- Windows / Linux / macOS  
-
-### 💖 Compile
-
-g++ -Isrc src/main.cpp src/atm/account/*.cpp src/atm/core/*.cpp src/atm/transaction/*.cpp src/atm/user/*.cpp -std=c++17 -Wall -o atm_system
-
-### 💖 Run
-
+🔹 Run
 ./atm_system.exe
 
-## ✨ **OOPS Concepts Used**
+🧪 Running Tests
 
-💗 **Encapsulation – Account balance and PIN are protected within classes**  
+When prompted:
 
-💗 **Abstraction – Transaction interface hides implementation details**  
+1. Run ATM
+2. Run Tests
 
-💗 **Inheritance – Deposit, Withdrawal, BalanceInquiry inherit from `Transaction`**  
 
-💗 **Polymorphism – ATM executes different transactions dynamically**  
+Select 2 to execute all unit tests.
 
-💗 **Modular Design – Each component has a clear responsibility**
+Example output:
 
-## ✨ Sample Output
-ATM System - Initialized
+[PASS] Negative Withdraw
+[PASS] Deposit Overflow
+[PASS] PIN Lock
+SUMMARY: 3 passed, 0 failed
 
-1. Balance Inquiry
-2. Deposit
-3. Withdraw
-4. Exit
-Choose option:
+🎯 Why This Project?
 
-## ✨ Future Enhancements
+🎀 Practice real-world OOPS & system design
+🎀 Learn secure authentication flows
+🎀 Implement persistent logging & audit trails
+🎀 Demonstrate testing mindset
+🎀 Build a strong interview-ready project
 
-🎀 Transaction history tracking
+🚀 Future Enhancements
 
-🎀 PIN retry limit and card blocking
+✨ Multi-user support
+✨ Database-backed persistence
+✨ Admin mode & analytics
+✨ Encryption for PIN storage
+✨ CI pipeline for automated tests
 
-🎀 File-based persistence
-
-🎀 UML diagrams and documentation
-
-## ✨ Why This Project?
-
-🎀 **Practice real-world OOPS design principles** 
-
-🎀 **Develop system-level thinking like real software systems** 
-
-🎀 **Build a strong, interview-ready project for resume & LinkedIn** 
-
-🎀 **Learn GitHub workflows hands-on (issues, branches, PRs)**  
-
-💌 Author
+👩‍💻 Author
 
 Aparna Jha
-
-❤️ Aspiring Software Engineer
-
-❤️ Learning by building
-
-❤️ Pink vibes, strong logic 
-
-✨ Built with patience, persistence, and a lot of debugging ✨
+🎀 Aspiring Software Engineer | System Design Enthusiast
