@@ -188,11 +188,11 @@ _______________________________________________________
 
 _______________________________________________________
 
-✨ Author
+✨ Author  
 
-Aparna Jha
+**Aparna Jha**  
 
-🎀 Aspiring Software Engineer | System Design Enthusiast
+🎀 Aspiring Software Engineer | System Design & OOPS Enthusiast
 
 🌸 Final Note
 
