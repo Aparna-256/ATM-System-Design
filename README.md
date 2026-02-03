@@ -1,116 +1,92 @@
-**🎀 ATM SYSTEM DESIGN (C++ | OOPS | SOLID)**
+# 🎀 ATM SYSTEM DESIGN (C++ | OOPS | SOLID)
 
-A production-style ATM simulation built in C++ using Object-Oriented Programming and SOLID principles, focused on clean architecture, security, logging, and testability.
+A **production-style ATM simulation** built in **C++** using **Object-Oriented Programming** and **SOLID principles**, focused on **clean architecture, security, logging, and testability**.
 
-This project is designed to reflect real-world system design, making it a strong resume + interview + DRDO-ready project.
-_______________________________________________________
+This project reflects **real-world system design**, making it a **strong resume, interview, and DRDO-ready project**.
 
-✨ Features
+---
 
-🎀 Secure PIN Authentication
+## ✨ Features
 
-PIN verification before access
+### 🎀 Secure PIN Authentication
+- PIN verification before access  
+- Card locks after **3 failed attempts**
 
-Card locks after 3 failed attempts
+### 🎀 Core ATM Operations
+- Balance Inquiry  
+- Deposit  
+- Withdraw  
 
+### 🎀 Audit Trail / Mini Statement
+- Persistent transaction logging  
+- Timestamped entries  
+- Stored in `logs/transactions.log`
 
-🎀 Core ATM Operations
+### 🎀 Transaction Logger
+- Unique transaction IDs  
+- Date & time stamping  
+- File-based persistence
 
-Balance Inquiry
+### 🎀 Built-in Unit Tests
+- Deposit validation  
+- Negative withdrawal protection  
+- PIN lock security test  
+- Tests runnable directly from the executable
 
-Deposit
+### 🎀 Clean & Modular Architecture
+- Loosely coupled components  
+- Easy to extend and maintain  
+- Clear separation of concerns
 
-Withdraw
+---
 
+## ✨ OOPS Concepts Used
 
-🎀 Audit Trail / Mini Statement
+💗 **Encapsulation**  
+Sensitive data like balance and PIN are protected within classes.
 
+💗 **Abstraction**  
+Transaction interfaces hide internal implementation details.
 
-Persistent transaction logging
+💗 **Inheritance**  
+`Deposit`, `Withdraw`, `BalanceInquiry` inherit from `Transaction`.
 
-Timestamped entries
+💗 **Polymorphism**  
+ATM dynamically executes different transaction types.
 
-Stored in logs/transactions.log
+💗 **Single Responsibility Principle**  
+Each class handles one responsibility only.
 
+---
 
-🎀 Transaction Logger
-
-
-Unique transaction IDs
-
-Date & time stamping
-
-File-based persistence
-
-
-🎀 Built-in Unit Tests
-
-
-Deposit validation
-
-Negative withdrawal protection
-
-PIN lock security test
-
-Run tests directly from the executable
-
-
-🎀 Clean & Modular Architecture
-
-
-Loosely coupled components
-
-Easy to extend and maintain
-
-_______________________________________________________
-
-
-✨ OOPS Concepts Used
-
-💗 Encapsulation
-Sensitive data like balance and PIN are protected within classes
-
-💗 Abstraction
-Transaction interfaces hide internal implementation details
-
-💗 Inheritance
-Deposit, Withdrawal, BalanceInquiry inherit from Transaction
-
-💗 Polymorphism
-ATM dynamically executes different transaction types
-
-💗 Single Responsibility Principle
-Each class handles only one responsibility
-
-_______________________________________________________
-
-✨ Project Structure
-
+## ✨ Project Structure
 ATM-System-Design/
+
 │
 
 ├── src/
 
-│   └── atm/
+│ └── atm/
 
-│       ├── account/        # Account & balance logic
+│ ├── account/ # Account & balance logic
 
-│       ├── core/           # ATM engine & transaction logger
+│ ├── core/ # ATM engine & transaction logger
 
-│       ├── transaction/    # Deposit, Withdraw, Balance Inquiry
+│ ├── transaction/ # Deposit, Withdraw, Balance Inquiry
 
-│       └── user/           # User & Card authentication
+│ └── user/ # User & Card authentication
 
 │
 
 ├── logs/
 
-│   └── transactions.log   # Persistent audit trail
+│ └── transactions.log # Persistent audit trail
 
 │
+
 ├── tests/
 
-│   └── testRunner.cpp     # Unit test suite
+│ └── testRunner.cpp # Unit test suite
 
 │
 
@@ -118,12 +94,18 @@ ATM-System-Design/
 
 ├── README.md
 
-_______________________________________________________
+├── LICENSE
 
-✨ How to Build & Run
 
-🔹 Compile
-g++ -Isrc -Itests src/main.cpp \
+
+---
+
+## ✨ How to Build & Run (Local)
+
+### 🔹 Compile
+
+g++ -Isrc -Itests \
+src/main.cpp \
 src/atm/account/*.cpp \
 src/atm/core/*.cpp \
 src/atm/transaction/*.cpp \
@@ -131,10 +113,35 @@ src/atm/user/*.cpp \
 tests/testRunner.cpp \
 -std=c++17 -Wall -o atm_system
 
-🔹 Run
-./atm_system.exe
 
-_______________________________________________________
+🔹 Run
+./atm_system
+
+✨ Run Using GitHub Codespaces (No Local Setup)
+
+This project is Codespaces-ready, meaning anyone can run it without installing anything locally.
+
+✨ Open Codespaces
+
+🎀 https://github.com/Aparna-256/ATM-System-Design/codespaces
+
+✨ Steps
+
+🎀 Click Create codespace on main
+
+🎀Wait for the environment to load (1–2 minutes)
+
+🎀 In the terminal, run: ./atm_system
+
+🎀 Choose:
+
+1 → Run ATM
+
+2 → Run Tests
+
+💖 No compiler setup
+💖 No dependency issues
+💖 Fully reproducible environment
 
 ✨ Running Tests
 
@@ -146,64 +153,50 @@ When prompted:
 
 Select 2 to execute all unit tests.
 
-_______________________________________________________
-
-✨ Example output:
-
+✨ Example Output
 [PASS] Negative Withdraw
-
 [PASS] Deposit Overflow
-
 [PASS] PIN Lock
 
 SUMMARY: 3 passed, 0 failed
 
-_______________________________________________________
+🎯 Interview-Level Explanation (IMPORTANT)
+
+If asked “How can I run your project?”, answer:
+
+“I’ve containerized the development environment using GitHub Codespaces. Anyone can open the repository, launch a codespace, and run the ATM system using a single make run command — no local dependencies required.”
+
+🔥 This signals system design maturity, not just coding.
 
 ✨ Why This Project?
 
 🎀 Practice real-world OOPS & system design
-
 🎀 Learn secure authentication flows
-
 🎀 Implement persistent logging & audit trails
-
 🎀 Demonstrate testing mindset
-
 🎀 Build a strong interview-ready project
-
-_______________________________________________________
 
 ✨ Future Enhancements
 
 🎀 Multi-user support
-
 🎀 Database-backed persistence
-
 🎀 Admin mode & analytics
-
 🎀 Encryption for PIN storage
-
 🎀 CI pipeline for automated tests
 
-_______________________________________________________
+✨ UML Class Diagram
 
-✨ Author  
+The UML class diagram below represents the core architecture of the ATM system and demonstrates inheritance, abstraction, polymorphism, and separation of concerns.
 
-**Aparna Jha**  
+📌 atm-uml-class-diagram
 
+✨ Author
+
+Aparna Jha
 🎀 Aspiring Software Engineer | System Design & OOPS Enthusiast
 
 🌸 Final Note
 
-This project prioritizes clarity, correctness, and extensibility — exactly what interviewers and research organizations like DRDO look for.
+This project prioritizes clarity, correctness, extensibility, and security — exactly what interviewers and research organizations like DRDO look for.
 
 Pink-powered. System-designed. Interview-ready. 🎀✨
-
-✨ UML Class Diagram
-
-The following UML class diagram represents the core architecture of the ATM system.
-It demonstrates the use of OOPS principles such as inheritance, abstraction,
-polymorphism, and separation of concerns.
-
-<img width="1782" height="558" alt="atm-uml-class-diagram" src="https://github.com/user-attachments/assets/7223684b-84ef-41c1-9d30-7c80cd2d12e3" />
