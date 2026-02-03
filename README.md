@@ -1,143 +1,43 @@
-# 💖 ATM System Design (C++ | OOPS)
+# ATM System Design - OOPS & SOLID
 
-> A menu-driven **ATM System** built using **C++ and Object-Oriented Programming**, designed to simulate real-world ATM operations with clean architecture and scalable design.
+A robust C++ ATM system designed with Object-Oriented Programming (OOPS) and SOLID principles. Features include PIN security, persistent audit trails, and automated unit testing.
 
-🌸 Built for learning  
-🌸 Designed for interviews  
-🌸 Styled with soft pink girly vibes — but still on point
+## 🚀 Live Demo (One-Click)
 
----
+You can run this project instantly in your browser without any local setup:
 
-## ✨ Features
-
-🎀 **ATM Operations**
-- Balance Inquiry  
-- Deposit  
-- Withdrawal  
-- Exit Session  
-
-🎀 **User & Card System**
-- Card abstraction
-- PIN validation support (extendable)
-
-🎀 **Clean & Modular Design**
-- Separated responsibilities
-- Easy to extend with new features
-- Real-world inspired system flow
+- **[Run on Replit](https://replit.com/github/Aparna-256/ATM-System-Design)** (Best for one-click testing)
+- **[Open in GitHub Codespaces](https://github.com/Aparna-256/ATM-System-Design/codespaces)** (Best for developers)
 
 ---
 
-## ✨ Project Structure
+## 🛠 Features
 
-src/
-│── main.cpp
+- **Security**: PIN authentication with automatic lock after 3 failed attempts (Persistent state).
+- **Core Operations**: Deposit, Withdrawal, and Balance Inquiry.
+- **Audit Logging**: Signed transaction logs with unique IDs and timestamps (`logs/transactions.log`).
+- **Maintenance Mode**: Built-in automated unit test runner for core logic verification.
+- **Concurrency**: Thread-safe account operations using a cross-platform compatibility layer.
 
-│
-└── atm/
+## 📖 Instructions
 
-├── account/
+### Running in the Browser (Replit)
+1. Click the **[Run on Replit](https://replit.com/github/Aparna-256/ATM-System-Design)** link.
+2. Click the green **Run** button at the top.
+3. Choose `1` for the ATM menu or `2` for Automated Tests.
+4. **Test PIN**: `1234`
 
-│ ├── Account.h
+### Running Locally
+1. Clone the repository: `git clone https://github.com/Aparna-256/ATM-System-Design.git`
+2. Run the build command:
+   ```bash
+   make run
+   ```
+   *(Or manual build: `g++ -Isrc -Itests src/main.cpp src/atm/account/Account.cpp src/atm/core/ATM.cpp src/atm/core/TransactionLogger.cpp src/atm/core/logger.cpp src/atm/user/User.cpp src/atm/user/Card.cpp tests/testRunner.cpp -std=c++17 -Wall -o atm_system`)*
 
-│ └── Account.cpp
-
-│
-
-├── core/
-
-│ ├── ATM.h
-
-│ └── ATM.cpp
-
-│
-
-├── transaction/
-
-│ ├── Transaction.h
-
-│ ├── BalanceInquiry.h / .cpp
-
-│ ├── Deposit.h / .cpp
-
-│ └── Withdrawal.h / .cpp
-
-│
-
-└── user/
-
-├── Card.h / .cpp
-
-└── User.h / .cpp
-
-
-✨ Structured to reflect real system design.
-
----
-
-## ✨ How to Build & Run
-
-### 💖 Requirements
-- C++17 compatible compiler  
-- MinGW / g++  
-- Windows / Linux / macOS  
-
-### 💖 Compile
-
-g++ -Isrc src/main.cpp src/atm/account/*.cpp src/atm/core/*.cpp src/atm/transaction/*.cpp src/atm/user/*.cpp -std=c++17 -Wall -o atm_system
-
-### 💖 Run
-
-./atm_system.exe
-
-## ✨ **OOPS Concepts Used**
-
-💗 **Encapsulation – Account balance and PIN are protected within classes**  
-
-💗 **Abstraction – Transaction interface hides implementation details**  
-
-💗 **Inheritance – Deposit, Withdrawal, BalanceInquiry inherit from `Transaction`**  
-
-💗 **Polymorphism – ATM executes different transactions dynamically**  
-
-💗 **Modular Design – Each component has a clear responsibility**
-
-## ✨ Sample Output
-ATM System - Initialized
-
-1. Balance Inquiry
-2. Deposit
-3. Withdraw
-4. Exit
-Choose option:
-
-## ✨ Future Enhancements
-
-🎀 Transaction history tracking
-
-🎀 PIN retry limit and card blocking
-
-🎀 File-based persistence
-
-🎀 UML diagrams and documentation
-
-## ✨ Why This Project?
-
-🎀 **Practice real-world OOPS design principles** 
-
-🎀 **Develop system-level thinking like real software systems** 
-
-🎀 **Build a strong, interview-ready project for resume & LinkedIn** 
-
-🎀 **Learn GitHub workflows hands-on (issues, branches, PRs)**  
-
-💌 Author
-
-Aparna Jha
-
-❤️ Aspiring Software Engineer
-
-❤️ Learning by building
-
-❤️ Pink vibes, strong logic 
-
-✨ Built with patience, persistence, and a lot of debugging ✨
+## 📂 Project Structure
+- `src/atm/core`: Main ATM logic and logging.
+- `src/atm/account`: Concurrent-safe account management.
+- `src/atm/user`: User authentication, PIN hashing, and card security.
+- `tests`: Automated TestRunner module.
+- `data/logs`: Persistent storage for state and transaction history.

@@ -1,0 +1,8 @@
+run = "make run"
+entrypoint = "src/main.cpp"
+
+[packager]
+language = "cpp"
+
+[interpreter]
+command = "make run"
