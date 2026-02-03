@@ -117,13 +117,15 @@ tests/testRunner.cpp \
 🔹 Run
 ./atm_system
 
-✨ Run Using GitHub Codespaces (No Local Setup)
+✨ Run in the Browser (No Setup Required)
 
-This project is Codespaces-ready, meaning anyone can run it without installing anything locally.
+This project is fully automated for cloud execution. Click below to start:
 
-✨ Open Codespaces
+🎀 **[Run on Replit (One-Click)](https://replit.com/github/Aparna-256/ATM-System-Design)**  
+*(Best for quick testing)*
 
-🎀 https://github.com/Aparna-256/ATM-System-Design/codespaces
+🎀 **[Open in GitHub Codespaces](https://github.com/Aparna-256/ATM-System-Design/codespaces)**  
+*(Best for deep code exploration)*
 
 ✨ Steps
 
