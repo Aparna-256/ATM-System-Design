@@ -30,3 +30,6 @@ clean:
 
 run: all
 	./$(TARGET)
+
+frontend:
+	python server.py
